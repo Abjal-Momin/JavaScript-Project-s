@@ -8,7 +8,7 @@ const guessSlot = document.querySelector(".guesses");
 const remaining = document.querySelector(".lastResult");
 const lowOrHi = document.querySelector(".lowOrHi");
 const startOver = document.querySelector(".resultParas");
-const invalid = document.querySelector('.invalid');
+const invalid = document.querySelector(".invalid");
 
 // To start new game Button
 const p = document.createElement("p");
@@ -30,10 +30,10 @@ if (playGame) {
 
 //To check the number and show message if invalid
 function validationGuess(guess) {
-  if (isNaN(guess)) { 
+  if (isNaN(guess)) {
     // +++++++++ alert only work on web page ++++++
     // alert("Please Eneter a valid Number");
-    invalid.innerHTML = "Please Eneter a valid Number";
+    invalid.innerHTML = "&#128683 Please Eneter a valid Number";
   } else if (guess < 1) {
     // alert("Please Eneter a Number more then 1");
     invalid.innerHTML = "Please Eneter a Number more then 1";
@@ -42,11 +42,13 @@ function validationGuess(guess) {
     invalid.innerHTML = "Please Eneter a Number less then 100";
   } else {
     prevGuess.push(guess);
-    invalid.innerHTML = '';
+    invalid.innerHTML = "";
 
     if (numGuess === 10) {
       displayGuess(guess);
-      displayMessage(`Game Over!, Random Number was ${randomNumber}`);
+      displayMessage(
+        `<p>Game Over!</p>, Random Number was <p>${randomNumber}</p>`
+      );
       endGame();
     } else {
       displayGuess(guess);
@@ -55,19 +57,19 @@ function validationGuess(guess) {
   }
 }
 
-// Display message Win, high or low 
+// Display message Win, high or low
 function checkGuess(guess) {
   if (guess === randomNumber) {
-    displayMessage(`You Guessed it Right`);
+    displayMessage(`&#127881 You Guessed it Right &#127881`);
     endGame();
   } else if (guess < randomNumber) {
-    displayMessage(`Number is Tooo low`);
+    displayMessage(`Number is Tooo low &#128317`);
   } else if (guess > randomNumber) {
-    displayMessage(`Number is Too high`);
+    displayMessage(`Number is Too high &#128316`);
   }
 }
 
-// Counting and Displaying 
+// Counting and Displaying
 function displayGuess(guess) {
   userInput.value = "";
   guessSlot.innerHTML += `${guess},  `;
@@ -75,7 +77,7 @@ function displayGuess(guess) {
   remaining.innerHTML = `${11 - numGuess}`;
 }
 
-// Display Messages 
+// Display Messages
 function displayMessage(message) {
   lowOrHi.innerHTML = `<h3 class = 'display'>${message}</h3>`;
 }
@@ -85,7 +87,7 @@ function endGame() {
   userInput.value = "";
   userInput.setAttribute("disabled", "");
   p.classList.add("button");
-  p.innerHTML = `<h2 id="newGame" >Start a new Game</h2>`;
+  p.innerHTML = `<h2 id="newGame" >Start a new Game &#128260</h2>`;
   startOver.appendChild(p);
   playGame = false;
   newGame();
@@ -102,7 +104,7 @@ function newGame() {
     remaining.innerHTML = `10`;
     userInput.removeAttribute("disabled");
     startOver.removeChild(p);
-    displayMessage('');
+    displayMessage("");
 
     playGame = true;
   });
